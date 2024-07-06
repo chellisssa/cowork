@@ -1,0 +1,36 @@
+$breakpoints: (
+        mobile: 743px,
+        s_tablet: 1024px,
+        tablet: 1280px,
+        large: 1400px
+) !default;
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "mobile" {
+    @media (max-width: map-get($breakpoints, mobile)) {
+      @content;
+    }
+  } @else if $breakpoint == "s_tablet" {
+    @media (max-width: map-get($breakpoints, s_tablet)) {
+      @content;
+    }
+  } @else if $breakpoint == "tablet" {
+    @media (max-width: map-get($breakpoints, tablet)) {
+      @content;
+    }
+  } @else if $breakpoint == "large" {
+    @media (max-width: map-get($breakpoints, large)) {
+      @content;
+    }
+  } @else {
+    @error $breakpoint == tablet "Invalid breakpoint provided. Use 'small', 'medium', or 'large'.";
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'GeneralSans', serif;
+    color: $black;
+
+    & * {
+        box-sizing: border-box;
+    }
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+.container {
+    //max-width: 1408px;
+    margin: 0 16px;
+}
+
+.nuxt-icon svg {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.from-right-enter-active,
+.from-right-leave-active {
+    transition: transform .3s ease-in;
+}
+
+.from-right-enter-from,
+.from-right-leave-to {
+    transform: translateX(100%);
+}

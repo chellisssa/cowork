@@ -1,0 +1,69 @@
+@import '_mixins';
+
+.h1 {
+    font-family: 'NeueRegrade';
+    font-weight: 700;
+    font-size: 96px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+
+    @include respond-to(tablet) {
+        font-size: 48px;
+        line-height: 1.2;
+        letter-spacing: 0;
+    }
+}
+
+.h2 {
+    font-family: 'NeueRegrade';
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.2;
+
+    @include respond-to(mobile) {
+        font-size: 32px;
+        line-height: 1.4;
+    }
+}
+
+.h3 {
+    font-family: 'NeueRegrade';
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.4;
+
+    @include respond-to(mobile) {
+        font-size: 16px;
+    }
+}
+
+.subheading {
+    font-family: 'NeueRegrade';
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.4;
+    text-transform: uppercase;
+
+    @include respond-to(tablet) {
+        font-size: 20px;
+    }
+}
+
+.paragraph {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.small {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.subtitle {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}

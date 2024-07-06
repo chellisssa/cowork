@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/svg-sprite": "^1.0.2",
+    "@vueform/multiselect": "^2.6.8",
+    "nuxt": "^3.12.2",
+    "nuxt-icons": "^3.2.1",
+    "sass": "^1.77.6",
+    "swiper": "^11.1.4",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/swiper": "^6.0.0"
+  }
+}

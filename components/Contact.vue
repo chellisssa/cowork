@@ -251,7 +251,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
     width: 106px;
 
     &._sent {
-      background-color: yellowgreen;
+      background-color: $green;
       pointer-events: none;
     }
   }

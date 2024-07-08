@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import {footerColumns, footerBottom} from '../content.ts';
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import type {FooterColumn, FooterItem} from '~/types/footer';
 import type {EmailSubscription} from '~/types/data';
 
 const footerColumnsList = ref<FooterColumn[]>(footerColumns);
 const footerBottomList = ref<FooterItem[]>(footerBottom);
 const email = ref<string>('');
+const inputRef = ref<HTMLElement | null>(null);
 const isUpdated = ref<boolean>(false);
 const isSent = ref<boolean>(false);
 
@@ -17,18 +18,23 @@ const handleUpdateInput = (obj: EmailSubscription): void => {
 const handleSubmitForm = (e: Event): void => {
   e.preventDefault();
   isUpdated.value = true;
-  setTimeout(() => {
-    isUpdated.value = false;
 
-    if (email.value) {
-      isSent.value = true;
-    }
-  }, 300);
-  setTimeout(() => {
-    isSent.value = false;
-  }, 5300);
+  if (email.value) {
+    isSent.value = true;
+
+    setTimeout(() => {
+      isSent.value = false;
+      inputRef.value.inputComponentRef.value = '';
+      isUpdated.value = false;
+    }, 5000);
+  } else {}
 };
 </script>
+else {
+setTimeout(() => {
+isUpdated.value = false;
+}, 300);
+}
 
 <template>
   <footer :class="$style.Footer">
@@ -39,6 +45,7 @@ const handleSubmitForm = (e: Event): void => {
           <p :class="[$style.disc, 'small']">Join our newsletter to stay up to date on features and releases.</p>
           <div :class="$style.row">
             <VInput
+                ref="inputRef"
                 v-model="email"
                 label="Enter your email"
                 name="email"
@@ -137,10 +144,10 @@ const handleSubmitForm = (e: Event): void => {
   }
 
   .button {
-    width: 134px;
+    width: 143px;
 
     &._sent {
-      background-color: yellowgreen;
+      background-color: $green;
     }
   }
 

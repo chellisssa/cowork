@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'white',
 });
 
-const input = ref<string | null>(null);
+const inputComponentRef = ref<HTMLElement | null>(null);
 const isFocused = ref<boolean>(false);
 const value = ref<string>('');
 const error = ref<string>('');
@@ -29,11 +29,18 @@ const emit = defineEmits<{
   (e: 'update', payload: Record<string, any>)
 }>();
 
+defineExpose({
+  inputComponentRef,
+})
+
 watch(
     () => props.isUpdated,
     (newVal) => {
       if (newVal && !value.value && props.required) {
         error.value = emptyMessage;
+      } else if (!newVal && !inputComponentRef.value.value) {
+        isFocused.value = false;
+        value.value = "";
       }
     },
     {
@@ -60,7 +67,7 @@ const handleInputBlur = (): void => {
     }
   }
 
-  if (props.type === 'email' && !input.value.validity.valid) {
+  if (props.type === 'email' && !inputComponentRef.value.validity.valid) {
     error.value = invalidMessage;
   } else if (props.name === 'password') {
     if (value.value.length < 8) {
@@ -87,7 +94,7 @@ const handleInputBlur = (): void => {
       <span v-if="required" class="subtitle">*</span>
     </label>
     <input
-        ref="input"
+        ref="inputComponentRef"
         v-model="value"
         :type="type"
         :class="[$style.input, 'paragraph']"

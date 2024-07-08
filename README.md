@@ -13,13 +13,15 @@ Welcome to Cowork, the ultimate coworking space designed for professionals seeki
 
 ###### Technologies Used
 
-**Frontend**: HTML, SCSS, JavaScript, Nuxt.js, TypeScript
+**Frontend**: HTML, SCSS, JavaScript, Vue3.js, Nuxt.js, TypeScript
 <br>
 **Deployment**: Vite
 <br>
 **Version Control**: Git
+<br>
+**Design by**: <a href="https://www.figma.com/@fathdev" target="_blank">Fathul Irfaan Abdillah</a>
 
 ###### Contact
 
-Email: chellisssa@gmail.com
-GitHub: Your GitHub Profile
+Email: <a mailto="chellissssa@gmail.com">chellisssa@gmail.com</a><br>
+GitHub: <a href="https://github.com/chellisssa?tab=repositories" target="_blank">@chellisssa</a>

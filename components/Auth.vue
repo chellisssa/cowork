@@ -208,8 +208,8 @@ const handleSubmitForm = (e) => {
   .button {
 
     &._sent {
-      background-color: yellowgreen;
-      border-color: yellowgreen;
+      background-color: $green;
+      border-color: $green;
       pointer-events: none;
     }
   }

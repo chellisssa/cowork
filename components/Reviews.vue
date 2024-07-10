@@ -91,18 +91,34 @@ onMounted(() => {
 
     .review:first-child {
       transform: translate(-12px, 1px);
+
+      @include respond-to(mobile) {
+        transform: none;
+      }
     }
 
     .review:nth-child(3) {
       transform: translate(-36px, 35px);
+
+      @include respond-to(mobile) {
+        transform: none;
+      }
     }
 
     .review:nth-child(4) {
       transform: translate(-38px, 35px);
+
+      @include respond-to(mobile) {
+        transform: none;
+      }
     }
 
     .review:nth-child(5) {
       transform: translate(-60px, 65px);
+
+      @include respond-to(mobile) {
+        transform: none;
+      }
     }
   }
 

@@ -14,6 +14,8 @@ import {Review} from "./types/review";
 import {Question} from "./types/question";
 import {BlogPostPreview} from "./types/blog";
 import {FooterColumn, FooterItem} from "./types/footer";
+import {PriceCard} from "./types/priceCard";
+import {AddOnCard} from "./types/AddOnCard";
 
 export const headerNavigation:NavigationItem[] = [
     {
@@ -24,7 +26,7 @@ export const headerNavigation:NavigationItem[] = [
     {
         id: 2,
         title: 'Pricing',
-        url: '',
+        url: '/pricing',
     },
     {
         id: 3,
@@ -301,5 +303,90 @@ export const footerBottom: FooterItem[] = [
         id: 3,
         title: 'Cookies Settings',
         url: '',
+    },
+]
+
+export const priceCards: PriceCard[] = [
+    {
+        id: 1,
+        title: "Hot Desk",
+        isPopular: false,
+        text: "For the ultimate in flexibility, go with a hot desk.",
+        price: 29,
+        afterText: "Pause or cancel anytime",
+        advantages: [
+            "✓  Access to any available hot desk",
+            "✓  Fast Wi-Fi and utilities included",
+            "✓  24/7 entry with keycard access",
+            "✓  Use of common areas and amenities",
+        ],
+        tags: ["Coffee", "Tea", "Water"],
+        buttonText: "Subscribe Now",
+    },
+    {
+        id: 2,
+        title: "Dedicated Desk",
+        isPopular: true,
+        text: "Claim your own dedicated workspace with this plan.",
+        price: 199,
+        afterText: "Pause or cancel anytime",
+        advantages: [
+            "✓  Your own reserved desk",
+            "✓  Lockable file cabinet",
+            "✓  2 Day Office credits per month",
+            "✓  All Hot Desk plan benefits and freebies",
+        ],
+        tags: ["Printing", "Copying", "Weekly Cleaning"],
+        buttonText: "Subscribe Now",
+    },
+    {
+        id: 3,
+        title: "Private Office",
+        isPopular: false,
+        text: "Professional private offices for maximum privacy and quiet.",
+        subtext: "Starting at",
+        price: 499,
+        afterText: "Pause or cancel anytime",
+        advantages: [
+            "✓  Private furnished office with standing desk",
+            "✓  24/7 access",
+            "✓  4 Day Office credits per month",
+            "✓  Mail and package service",
+            "✓  All Dedicated Desk plan benefits and freebies",
+        ],
+        tags: ["Monthly Parking Pass"],
+        buttonText: "Subscribe Now",
+    },
+]
+
+export const addOnCard: AddOnCard[] = [
+    {
+        id: 1,
+        title: "Day Office",
+        text: "Rent a private office for just the day",
+        price: 25,
+        subtext: "maximum 15 days/month",
+        buttonText: "Add to Your Subscription",
+        disclaimer: "Require minimum Hot Desk subscription",
+    },
+    {
+        id: 2,
+        title: "Conference Room",
+        text: "Book rooms for meetings or presentations",
+        price: 35,
+        period: "hr",
+        subtext: "24-hour cancellation required",
+        buttonText: "Add to Your Subscription",
+        disclaimer: "Require minimum Hot Desk subscription",
+    },
+    {
+        id: 3,
+        title: "Dedicated Desk Assistant",
+        text: "Get support from a dedicated assistant",
+        price: 99,
+        period: "mo",
+        subtext: "Pause or cancel anytime",
+        buttonText: "Add to Your Subscription",
+        disclaimer: "Require minimum Dedicated Desk subscription",
     },
 ]

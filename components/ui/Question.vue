@@ -61,6 +61,7 @@ const openQuestion = (e: Event) => {
   transition: border-color .3s ease-in;
 
   &._open {
+
     .bottom {
       margin-top: -16px;
       padding: 0 32px 32px;
@@ -69,6 +70,10 @@ const openQuestion = (e: Event) => {
         margin-top: -8px;
         padding: 0 24px 24px;
       }
+    }
+
+    .icon {
+      transform: rotate(180deg);
     }
   }
 
@@ -95,6 +100,7 @@ const openQuestion = (e: Event) => {
     width: 32px;
     height: 32px;
     margin-left: 32px;
+    transition: transform .3s ease-in;
   }
 
   .bottom {

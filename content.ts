@@ -6,6 +6,27 @@ import person5 from './assets/images/reviews/person-5.png';
 import blog1 from './assets/images/blog/blog-1.jpg';
 import blog2 from './assets/images/blog/blog-2.jpg';
 import blog3 from './assets/images/blog/blog-3.jpg';
+import blog4 from './assets/images/blog/blog-4.jpg';
+import blog5 from './assets/images/blog/blog-5.jpg';
+import blog6 from './assets/images/blog/blog-6.jpg';
+import blog7 from './assets/images/blog/blog-7.jpg';
+import blog8 from './assets/images/blog/blog-8.jpg';
+import blog9 from './assets/images/blog/blog-9.jpg';
+import blog10 from './assets/images/blog/blog-10.jpg';
+import blog11 from './assets/images/blog/blog-11.jpg';
+import blog12 from './assets/images/blog/blog-12.jpg';
+import blog13 from './assets/images/blog/blog-13.jpg';
+import blog14 from './assets/images/blog/blog-14.jpg';
+import blog15 from './assets/images/blog/blog-15.jpg';
+import blog16 from './assets/images/blog/blog-16.jpg';
+import blog17 from './assets/images/blog/blog-17.jpg';
+import blog18 from './assets/images/blog/blog-18.jpg';
+import blog19 from './assets/images/blog/blog-19.jpg';
+import blog20 from './assets/images/blog/blog-20.jpg';
+import blog21 from './assets/images/blog/blog-21.jpg';
+import blog22 from './assets/images/blog/blog-22.jpg';
+import blog23 from './assets/images/blog/blog-23.jpg';
+import blog24 from './assets/images/blog/blog-24.jpg';
 import {NavigationItem} from "./types/navigationItem";
 import {Company} from "./types/company";
 import {Advantage} from "./types/advantage";
@@ -31,7 +52,7 @@ export const headerNavigation:NavigationItem[] = [
     {
         id: 3,
         title: 'Blog',
-        url: '',
+        url: '/blog',
     },
     {
         id: 4,
@@ -195,6 +216,153 @@ export const blogPosts: BlogPostPreview[] = [
         read_time: 10,
         title: 'Tech Talk: The Backbone of Cowork\'s Seamless Experience',
     },
+    {
+        id: 4,
+        image: blog4,
+        tag: 'Productivity',
+        read_time: 5,
+        title: 'Productivity Hacks for Coworking Professionals',
+    },
+    {
+        id: 5,
+        image: blog5,
+        tag: 'Career',
+        read_time: 8,
+        title: 'The Rise of Freelancing and the Gig Economy',
+    },
+    {
+        id: 6,
+        image: blog6,
+        tag: 'Talk',
+        read_time: 11,
+        title: 'Networking Success Stories from Our Community',
+    },
+    {
+        id: 7,
+        image: blog7,
+        tag: 'Trending',
+        read_time: 6,
+        title: 'Hot New Startups to Watch from Our Space',
+    },
+    {
+        id: 8,
+        image: blog8,
+        tag: 'Lifestyle',
+        read_time: 5,
+        title: 'Enhancing Wellness for Remote Workers',
+    },
+    {
+        id: 9,
+        image: blog9,
+        tag: 'Productivity',
+        read_time: 7,
+        title: '7 Team Collaboration Tools for Remote Teams',
+    },
+    {
+        id: 10,
+        image: blog10,
+        tag: 'Trending',
+        read_time: 4,
+        title: 'Coworking Space Design Trends for 2024',
+    },
+    {
+        id: 11,
+        image: blog11,
+        tag: 'Technology',
+        read_time: 9,
+        title: 'The Impact of AI on Modern Coworking Spaces'
+    },
+    {
+        id: 12,
+        image: blog12,
+        tag: 'Career',
+        read_time: 6,
+        title: 'Building a Personal Brand in a Coworking Environment'
+    },
+    {
+        id: 13,
+        image: blog13,
+        tag: 'Productivity',
+        read_time: 8,
+        title: 'Balancing Work and Life in a Coworking Space'
+    },
+    {
+        id: 14,
+        image: blog14,
+        tag: 'Trending',
+        read_time: 5,
+        title: 'Future of Remote Work: Insights from Industry Leaders'
+    },
+    {
+        id: 15,
+        image: blog15,
+        tag: 'Talk',
+        read_time: 7,
+        title: 'Expert Panel: The Evolution of Coworking Spaces'
+    },
+    {
+        id: 16,
+        image: blog16,
+        tag: 'Lifestyle',
+        read_time: 6,
+        title: 'Creating a Sustainable Coworking Space'
+    },
+    {
+        id: 17,
+        image: blog17,
+        tag: 'Technology',
+        read_time: 10,
+        title: 'The Role of Virtual Reality in Coworking Spaces'
+    },
+    {
+        id: 18,
+        image: blog18,
+        tag: 'Career',
+        read_time: 7,
+        title: 'Career Development Workshops: A Key to Success'
+    },
+    {
+        id: 19,
+        image: blog19,
+        tag: 'Productivity',
+        read_time: 8,
+        title: 'Maximizing Efficiency with Time Management Tools'
+    },
+    {
+        id: 20,
+        image: blog20,
+        tag: 'Trending',
+        read_time: 7,
+        title: 'Innovative Solutions for Coworking Space Challenges'
+    },
+    {
+        id: 21,
+        image: blog21,
+        tag: 'Productivity',
+        read_time: 6,
+        title: 'Effective Communication Strategies for Remote Teams'
+    },
+    {
+        id: 22,
+        image: blog22,
+        tag: 'Talk',
+        read_time: 9,
+        title: 'Insights from Coworking Space Founders'
+    },
+    {
+        id: 23,
+        image: blog23,
+        tag: 'Lifestyle',
+        read_time: 5,
+        title: 'Creating a Work-Life Balance in a Coworking Space'
+    },
+    {
+        id: 24,
+        image: blog24,
+        tag: 'Career',
+        read_time: 7,
+        title: 'Leveraging Coworking Spaces for Career Growth'
+    },
 ]
 
 export const footerColumns: FooterColumn[] = [
@@ -220,7 +388,7 @@ export const footerColumns: FooterColumn[] = [
             {
                 id: 4,
                 title: 'Blog',
-                url: '',
+                url: '/blog',
             },
             {
                 id: 5,

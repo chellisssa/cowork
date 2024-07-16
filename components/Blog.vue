@@ -5,7 +5,7 @@ import {blogPosts} from '../content.ts';
 import {createIntersectionObserver} from "../utils/createIntersectionObserver";
 import type BlogPostPreview from '~/types/blog';
 
-const blogPostsList = ref<BlogPostPreview[]>(blogPosts);
+const blogPostsList = ref<BlogPostPreview[]>(blogPosts.slice(0, 3));
 const sectionRef = ref<HTMLElement | null>(null);
 const isAnimationStarted = ref<boolean>(false);
 let observer:  IntersectionObserver | undefined;
@@ -36,24 +36,15 @@ onMounted(() => {
       </div>
     </header>
     <ul :class="$style.list">
-      <li
+      <PostCard
           v-for="post in blogPostsList"
           :key="post.id"
           :class="$style.post"
-      >
-        <div :class="$style.postWrapper">
-          <div :class="$style.postImageWrapper">
-            <img :src="post.image" :class="$style.postImage"/>
-          </div>
-          <div :class="$style.postContent">
-            <div :class="$style.postTag">{{ post.tag }}</div>
-            <p :class="[$style.postTime, 'small']">{{ post.read_time }} min read</p>
-          </div>
-          <h3 :class="[$style.postTitle, 'h3']">{{ post.title }}</h3>
-        </div>
-      </li>
+          :post="post"
+          :is-animated="isAnimationStarted"
+      />
     </ul>
-    <VButton title="View All" :class="$style.button"/>
+    <VButton title="View All" :class="$style.button" type="a" href="/blog" />
   </section>
 </template>
 
@@ -64,10 +55,6 @@ onMounted(() => {
 
     .image {
       max-width: 180px;
-    }
-
-    .postWrapper {
-      transform: translateY(0);
     }
   }
 
@@ -127,6 +114,7 @@ onMounted(() => {
     display: flex;
     gap: 16px;
     margin-top: 48px;
+    overflow: hidden;
 
     @include respond-to(mobile) {
       flex-direction: column;
@@ -135,85 +123,22 @@ onMounted(() => {
 
   .post {
     width: calc((100% - 2 * 16px) / 3);
-    cursor: pointer;
-    overflow: hidden;
 
     @include respond-to(mobile) {
       width: 100%;
     }
 
-    @include hover() {
-      .postImage {
-        transform: scale(1.1);
-      }
-    }
-
     &:nth-child(2) {
-
-      .postWrapper {
-        transition-delay: .4s;
-      }
+      transition-delay: .4s;
     }
 
     &:nth-child(3) {
-
-      .postWrapper {
-        transition-delay: .6s;
-      }
+      transition-delay: .6s;
     }
-  }
-
-  .postWrapper {
-    transform: translateY(101%);
-    transition: transform .5s ease-in .2s;
-  }
-
-  .postImageWrapper {
-    width: 100%;
-    height: 300px;
-    border-radius: 24px;
-    overflow: hidden;
-
-    @include respond-to(tablet) {
-      height: 266px;
-    }
-
-    @include respond-to(mobile) {
-      height: 300px;
-    }
-  }
-
-  .postImage {
-    width: 100%;
-    height: 100%;
-    transition: transform .3s ease-in;
-  }
-
-  .postContent {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 24px;
-
-    @include respond-to(mobile) {
-      margin-top: 16px;
-    }
-  }
-
-  .postTag {
-    padding: 4px 8px;
-    border: 1px solid $black;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 600;
-  }
-
-  .postTitle {
-    margin-top: 16px;
   }
 
   .button {
+    width: fit-content;
     margin: 64px auto 0;
 
     @include respond-to(mobile) {

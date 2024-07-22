@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {ref} from 'vue';
 import authImage from '../assets/images/auth.jpg';
 import signupImage from '../assets/images/signup.jpg';
@@ -19,7 +19,7 @@ const handleUpdateInput = (obj) => {
   }
 };
 
-const handleSubmitForm = (e) => {
+const handleSubmitForm = (e: Event) => {
   e.preventDefault();
   isUpdated.value = true;
   setTimeout(() => {
@@ -33,8 +33,22 @@ const handleSubmitForm = (e) => {
         navigateTo('/');
       }, 3000);
     }
+  } else {
+    if (data.value.username && data.value.email && data.value.password && data.value.repeatPassword && data.value.password === data.value.repeatPassword) {
+      isSent.value = true;
+      saveToLocalStorage();
+      setTimeout(() => {
+        navigateTo('/');
+      }, 3000);
+    }
   }
 };
+
+const saveToLocalStorage = (): void => {
+  localStorage.setItem("username", data.value.username);
+  localStorage.setItem("email", data.value.email);
+  localStorage.setItem("password", data.value.password);
+}
 </script>
 
 <template>
@@ -106,7 +120,7 @@ const handleSubmitForm = (e) => {
       <VButton
           :title="isLogin
             ? isSent ? 'Logged In' : 'Submit'
-            : 'Submit'"
+            : isSent ? 'Submitted' : 'Submit'"
           :class="[$style.button, {[$style._sent]: isSent}]"
           @click="e => handleSubmitForm(e)"
       />

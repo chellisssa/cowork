@@ -4,11 +4,11 @@ import {ref} from "vue";
 import {createIntersectionObserver} from "../utils/createIntersectionObserver";
 
 const sectionRef = ref<HTMLElement | null>(null);
-const isAnimationStarted = ref<boolean>(false);
+const isAnimated = ref<boolean>(false);
 let observer: IntersectionObserver | undefined;
 
 const handleIntersection: IntersectionObserverCallback = () => {
-  isAnimationStarted.value = true;
+  isAnimated.value = true;
 };
 
 onMounted(() => {
@@ -20,7 +20,7 @@ onMounted(() => {
   <section ref="sectionRef" :class="$style.Subscription">
     <h2 :class="[$style.title, 'h1']">
       Seize
-      <img :src="subscriptionImage" :class="[$style.image, {[$style._animated]: isAnimationStarted}]">
+      <img :src="subscriptionImage" :class="[$style.image, {[$style._animated]: isAnimated}]">
       The Moment
     </h2>
     <h2 :class="[$style.title, 'h1']">

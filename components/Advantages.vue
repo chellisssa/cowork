@@ -7,11 +7,11 @@ import type Advantage from '~/types/advantage';
 
 const advantagesList = ref<Advantage[]>(advantages);
 const sectionRef = ref<HTMLElement | null>(null);
-const isAnimationStarted = ref<boolean>(false);
+const isAnimated = ref<boolean>(false);
 let observer: IntersectionObserver | undefined;
 
 const handleIntersection: IntersectionObserverCallback = () => {
-  isAnimationStarted.value = true;
+  isAnimated.value = true;
 };
 
 onMounted(() => {
@@ -23,11 +23,11 @@ onMounted(() => {
   <section ref="sectionRef" :class="$style.Advantages">
     <h2 :class="[$style.title, 'h2']">
       Why Choose
-      <img :src="advantageImage" :class="[$style.image, {[$style._animated]: isAnimationStarted}]">
+      <img :src="advantageImage" :class="[$style.image, {[$style._animated]: isAnimated}]">
       Cowork?
     </h2>
 
-    <ul :class="[$style.list, {[$style._animated]: isAnimationStarted}]">
+    <ul :class="[$style.list, {[$style._animated]: isAnimated}]">
       <li
           v-for="advantage in advantagesList"
           :key="advantage.id"

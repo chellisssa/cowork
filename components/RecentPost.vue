@@ -77,8 +77,11 @@ defineProps<Props>();
   }
 
   .button {
-    margin-top: 80px;
-    width: 100%;
+
+    @include respond-to(mobile) {
+      margin-top: 80px;
+      width: 100%;
+    }
   }
 }
 </style>

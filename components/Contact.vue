@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 import type ContactData from '~/types/data';
+import {createIntersectionObserver} from "../utils/createIntersectionObserver";
+
+type ContactDataUpdate = Partial<ContactData>;
 
 const isUpdated = ref<boolean>(false);
 const isSent = ref<boolean>(false);
@@ -12,9 +15,16 @@ const data = ref<ContactData>({
   plan: '',
   message: '',
 });
+const sectionRef = ref<HTMLElement | null>(null);
+const isAnimated = ref<boolean>(false);
+let observer: IntersectionObserver | undefined;
+
+onMounted(() => {
+  observer = createIntersectionObserver(sectionRef.value, handleIntersection, .3);
+});
 
 const handleSubmitForm = (e: Event): void => {
-  e.preventDefault();
+  if (e) e.preventDefault();
   isUpdated.value = true;
   setTimeout(() => {
     isUpdated.value = false;
@@ -30,24 +40,28 @@ const handleSubmitForm = (e: Event): void => {
   }
 };
 
-type ContactDataUpdate = Partial<ContactData>;
 const handleUpdateInput = (obj: ContactDataUpdate): void => {
   for (let key in obj) {
     data.value[key] = obj[key];
   }
 }
+
+const handleIntersection: IntersectionObserverCallback = () => {
+  isAnimated.value = true;
+};
 </script>
 
 <template>
-  <section :class="$style.Contact">
+  <section ref="sectionRef" :class="$style.Contact">
     <header :class="$style.header">
       <h1 :class="[$style.title, 'h1']">Contact Us
         <nuxt-icon name="chat-bubbles" :class="$style.icon" filled/>
       </h1>
-      <div :class="[$style.text, 'paragraph']">
-        Have questions about our coworking space and membership plans? Drop us a line using the form below or give us a
-        call.
-      </div>
+      <VDescription
+          text="Have questions about our coworking space and membership plans? Drop us a line using the form below or give us a call."
+          :is-animated="isAnimated"
+          :class="$style.text"
+      />
     </header>
     <main :class="$style.main">
       <div :class="$style.column">
@@ -76,6 +90,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="firstName"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
           <VInput
               label="Last Name"
@@ -83,6 +98,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="lastName"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
         </div>
         <div :class="$style.formRow">
@@ -93,6 +109,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="email"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
         </div>
         <div :class="$style.formRow">
@@ -102,6 +119,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="phone"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
         </div>
         <div :class="$style.formRow">
@@ -111,6 +129,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="plan"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
         </div>
         <div :class="$style.formRow">
@@ -120,6 +139,7 @@ const handleUpdateInput = (obj: ContactDataUpdate): void => {
               name="message"
               :is-updated="isUpdated"
               @update="obj => handleUpdateInput(obj)"
+              @submit="handleSubmitForm"
           />
         </div>
 

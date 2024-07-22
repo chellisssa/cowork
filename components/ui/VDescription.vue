@@ -2,6 +2,7 @@
 interface Props {
   text: string,
   isAnimated: boolean,
+  isSubheading?: boolean | undefined,
 }
 
 const props = defineProps<Props>();
@@ -9,7 +10,7 @@ const props = defineProps<Props>();
 
 <template>
   <div :class="[$style.VDescription, {[$style._animated]: isAnimated}]">
-    <p :class="[$style.text, 'paragraph']" v-html="text"></p>
+    <p :class="[$style.text, isSubheading ? 'subheading' : 'paragraph']" v-html="text"></p>
   </div>
 </template>
 
@@ -31,7 +32,7 @@ const props = defineProps<Props>();
   &:before {
     content: '';
     position: absolute;
-    bottom: 76px;
+    bottom: calc(100% - 1px);
     left: 0;
     width: 200px;
     height: 1px;

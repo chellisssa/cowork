@@ -41,12 +41,13 @@ const props = defineProps<Props>();
     </ul>
     <p :class="$style.tagsTitle">Bonus</p>
     <ul :class="$style.tags">
-      <li v-for="(tag, index) in card.tags"
+      <VTag
+          v-for="(tag, index) in card.tags"
           :key="index"
+          :title="tag"
+          size="small"
           :class="[$style.tag, 'small']"
-      >
-        {{ tag }}
-      </li>
+      />
     </ul>
     <VButton :class="$style.button" :title="card.buttonText" />
   </li>
@@ -151,12 +152,6 @@ const props = defineProps<Props>();
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 12px;
-  }
-
-  .tag {
-    padding: 0 12px;
-    border: 1px solid $black;
-    border-radius: 100px;
   }
 
   .button {

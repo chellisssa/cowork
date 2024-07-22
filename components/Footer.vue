@@ -16,7 +16,7 @@ const handleUpdateInput = (obj: EmailSubscription): void => {
 };
 
 const handleSubmitForm = (e: Event): void => {
-  e.preventDefault();
+  if (e) e.preventDefault();
   isUpdated.value = true;
 
   if (email.value) {
@@ -30,18 +30,15 @@ const handleSubmitForm = (e: Event): void => {
   } else {}
 };
 </script>
-else {
-setTimeout(() => {
-isUpdated.value = false;
-}, 300);
-}
 
 <template>
   <footer :class="$style.Footer">
     <div :class="$style.wrapper">
       <div :class="$style.mainCol">
         <nuxt-icon name="logo" :class="$style.logo"/>
-        <form action="" :class="$style.form">
+        <form
+            :class="$style.form"
+        >
           <p :class="[$style.disc, 'small']">Join our newsletter to stay up to date on features and releases.</p>
           <div :class="$style.row">
             <VInput
@@ -53,6 +50,7 @@ isUpdated.value = false;
                 required
                 :is-updated="isUpdated"
                 @update="obj => handleUpdateInput(obj)"
+                @submit="handleSubmitForm"
             />
             <VButton
                 :class="[$style.button, {[$style._sent]: isSent}]"

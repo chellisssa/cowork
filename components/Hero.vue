@@ -1,17 +1,24 @@
 <script setup lang="ts">
 import heroImage from '../assets/images/hero-image.jpg';
+import {ref} from "vue";
+import {createIntersectionObserver} from "../utils/createIntersectionObserver";
 
 const isMounted = ref<boolean>(false);
+const sectionRef = ref<HTMLElement | null>(null);
+const isAnimated = ref<boolean>(false);
+let observer: IntersectionObserver | undefined;
+
+const handleIntersection: IntersectionObserverCallback = () => {
+  isAnimated.value = true;
+};
 
 onMounted(() => {
-  setTimeout(() => {
-    isMounted.value = true;
-  }, 1000);
+  observer = createIntersectionObserver(sectionRef.value, handleIntersection, .3);
 });
 </script>
 
 <template>
-  <section :class="$style.Hero">
+  <section ref="sectionRef" :class="$style.Hero">
     <div :class="[$style.box, $style._big]">
       <h1 :class="[$style.title, 'h1']">Elevate Your Workspace with Cowork
         <nuxt-icon name="circle-highlight" :class="$style.circle" filled/>
@@ -25,9 +32,12 @@ onMounted(() => {
             href="/contact"
             :class="$style.button"
         />
-        <p :class="[$style.text, 'subheading', {[$style._mounted]: isMounted}]">
-          <span>Where innovation meets collaboration&nbsp;🚀</span>
-        </p>
+        <VDescription
+            text="Where innovation meets collaboration&nbsp;🚀"
+            is-subheading
+            :is-animated="isAnimated"
+            :class="$style.text"
+        />
       </div>
     </div>
     <div :class="[$style.box, $style._small]">
@@ -140,42 +150,12 @@ onMounted(() => {
   }
 
   .text {
-    position: relative;
     width: 360px;
-    color: $white;
     margin-left: 24px;
-    padding-top: 10px;
-    overflow: hidden;
 
     @include respond-to(mobile) {
       margin-left: 0;
       margin-bottom: 48px;
-    }
-
-    &._mounted {
-
-      &:before,
-      span {
-        transform: translateX(0);
-      }
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 76px;
-      left: 0;
-      width: 200px;
-      height: 1px;
-      background-color: $white;
-      transform: translateX(-100%);
-      transition: transform .5s ease-in;
-    }
-
-    span {
-      display: block;
-      transform: translateX(-100%);
-      transition: transform .5s ease-in .3s;
     }
   }
 

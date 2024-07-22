@@ -13,11 +13,11 @@ const nextElRef = ref<HTMLElement | null>(null);
 const prevElRef = ref<HTMLElement | null>(null);
 const reviewsList = ref<Review[]>(reviews);
 const sectionRef = ref<HTMLElement | null>(null);
-const isAnimationStarted = ref<boolean>(false);
+const isAnimated = ref<boolean>(false);
 let observer: IntersectionObserver | undefined;
 
 const handleIntersection: IntersectionObserverCallback = () => {
-  isAnimationStarted.value = true;
+  isAnimated.value = true;
 };
 
 onMounted(() => {
@@ -42,15 +42,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" :class="[$style.Reviews, {[$style._animated]: isAnimationStarted}]">
+  <section ref="sectionRef" :class="[$style.Reviews, {[$style._animated]: isAnimated}]">
     <header :class="$style.header">
       <h2 :class="[$style.title, 'h1']">
         Hear It from Our Clients
         <nuxt-icon name="crowd" :class="$style.icon" filled />
       </h2>
-      <div :class="[$style.text, 'subheading']">
-        <span>Cowork in Words</span>
-      </div>
+      <VDescription
+          text="Cowork in Words"
+          is-subheading
+          :is-animated="isAnimated"
+      />
     </header>
     <div :class="$style.arrows">
       <button :class="[$style.arrow, $style._prev]" ref="prevElRef">
@@ -80,14 +82,6 @@ onMounted(() => {
   background-color: $black;
 
   &._animated {
-
-    .text:before {
-      transform: translateX(0);
-    }
-
-    .text span {
-      transform: translateX(0);
-    }
 
     .review:first-child {
       transform: translate(-12px, 1px);
@@ -174,31 +168,6 @@ onMounted(() => {
       bottom: 11px;
       right: auto;
       left: 200px;
-    }
-  }
-
-  .text {
-    position: relative;
-    color: $white;
-    padding-top: 8px;
-    overflow: hidden;
-
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 37px;
-      left: 0;
-      width: 200px;
-      height: 1px;
-      background-color: $white;
-      transform: translateX(-100%);
-      transition: transform .3s ease-in;
-    }
-
-    span {
-      display: block;
-      transform: translateX(-100%);
-      transition: transform .3s ease-in .3s;
     }
   }
 

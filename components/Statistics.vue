@@ -8,11 +8,11 @@ import type {StatisticItem} from "../types/statisticItem";
 
 const statisticsList = ref<StatisticItem[]>(statistics);
 const sectionRef = ref<HTMLElement | null>(null);
-const isAnimationStarted = ref<boolean>(false);
+const isAnimated = ref<boolean>(false);
 let observer: IntersectionObserver | undefined;
 
 const handleIntersection: IntersectionObserverCallback = () => {
-  isAnimationStarted.value = true;
+  isAnimated.value = true;
 };
 
 onMounted(() => {
@@ -26,7 +26,7 @@ onMounted(() => {
       <nuxt-icon name="border" :class="$style.border" filled />
       <h3 :class="[$style.subtitle, 'subtitle']">Cowork in Numbers</h3>
       <h2 :class="[$style.title, 'h2']">Transformative Statistics That Speak Volumes</h2>
-      <ul :class="[$style.list, {[$style._animated]: isAnimationStarted}]">
+      <ul :class="[$style.list, {[$style._animated]: isAnimated}]">
         <li v-for="stat in statisticsList" :key="stat.id" :class="$style.statItem">
           <div :class="$style.statItemWrapper">
             <span :class="[$style.statItemValue, 'h2']">{{ stat.value }}</span>

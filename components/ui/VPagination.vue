@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 interface Props {
   postsPerPage: number,
@@ -7,12 +7,22 @@ interface Props {
 }
 const props = defineProps<Props>();
 
-const maxPage: number = Math.ceil(props.postsLength / props.postsPerPage);
 const pages = ref<number[]>([]);
-for (let i = 1; i <= maxPage; i++) {
-  pages.value.push(i);
-}
 const activePage = ref<number>(1);
+let maxPage: number;
+
+watch(
+    () => props.postsLength,
+    () => {
+      maxPage = Math.ceil(props.postsLength / props.postsPerPage);
+      pages.value = [];
+      for (let i = 1; i <= maxPage; i++) {
+        pages.value.push(i);
+      }
+      activePage.value = 1;
+    },
+    { immediate: true }
+);
 
 const emit = defineEmits<{
   (e: 'update-posts', page: number)

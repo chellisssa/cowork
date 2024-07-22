@@ -26,7 +26,8 @@ const lengthMessage: string = 'Password should be at least 8 characters.';
 const charactersMessage: string = 'Password should contain letters, numbers and special characters.';
 const notIdenticalPasswordMessage: string = 'Passwords are not the same.'
 const emit = defineEmits<{
-  (e: 'update', payload: Record<string, any>)
+  (e: 'update', payload: Record<string, any>),
+  (e: 'submit'),
 }>();
 
 defineExpose({
@@ -53,12 +54,24 @@ const validatePassword = (password: string): boolean => {
   return pattern.test(password);
 }
 
+const handleInput = (): void => {
+  if (error.value) error.value = '';
+}
+
+const handleInputKeyDown = (e: Event): void => {
+  if (e.key === "Enter") {
+    inputComponentRef.value.blur();
+    emit('submit');
+  }
+}
+
 const handleInputFocus = (): void => {
   isFocused.value = true;
   error.value = '';
 }
 
 const handleInputBlur = (): void => {
+
   if (!value.value) {
     isFocused.value = false;
 
@@ -99,6 +112,8 @@ const handleInputBlur = (): void => {
         :type="type"
         :class="[$style.input, 'paragraph']"
         @focus="handleInputFocus"
+        @input="handleInput"
+        @keydown="handleInputKeyDown"
         @blur="handleInputBlur"
     />
     <p :class="$style.error">{{ error }}</p>

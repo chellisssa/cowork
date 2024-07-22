@@ -15,8 +15,11 @@ let observer:  IntersectionObserver | undefined;
 const tagsList = props.posts.map(post => post.tag);
 const tags = ref<string[]>([...new Set(tagsList)]);
 const postsPerPage: number = 9;
-const activePosts = ref<BlogPostPreview[]>(props.posts.slice(0, postsPerPage));
+const filteredPosts = ref<BlogPostPreview[]>(props.posts);
+const activePosts = ref<BlogPostPreview[]>(filteredPosts.value.slice(0, postsPerPage));
 let offset: number | undefined;
+
+const activeTags = ref<string[]>(['All']);
 
 onMounted(() => {
   offset = window.innerWidth < 743 ? 110 : 140;
@@ -35,12 +38,40 @@ const scrollTo = (top:number):void => {
 };
 
 const handleUpdatePosts = (page: number): void => {
-  activePosts.value = props.posts.slice(
+  activePosts.value = filteredPosts.value.slice(
       (page - 1) * postsPerPage,
       page * postsPerPage
   );
   scrollTo(window.scrollY + sectionRef.value.getBoundingClientRect().top - offset);
 };
+
+const handleFilterTags = (tag: string): void => {
+  if (tag === 'All') {
+    activeTags.value = ['All'];
+  } else {
+    activeTags.value = activeTags.value.filter(t => t !== 'All');
+    if (activeTags.value.includes(tag)) {
+      activeTags.value = activeTags.value.filter(t => t !== tag);
+    } else {
+      activeTags.value.push(tag);
+    }
+  }
+
+  if (!activeTags.value.length) {
+    activeTags.value = ['All'];
+  }
+
+  handleFilterPosts();
+  handleUpdatePosts(1);
+}
+
+const handleFilterPosts = (): void => {
+  if (activeTags.value.includes('All')) {
+    filteredPosts.value = props.posts;
+  } else {
+    filteredPosts.value = props.posts.filter(post => activeTags.value.includes(post.tag));
+  }
+}
 </script>
 
 <template>
@@ -50,16 +81,19 @@ const handleUpdatePosts = (page: number): void => {
   >
 
     <ul :class="$style.tags">
-      <li :class="$style.tag">
-        <VButton
-            title="All Posts"
-        />
-      </li>
+      <VTag
+          title="All Posts"
+          :class="[$style.tag]"
+          :is-active="activeTags.includes('All')"
+          @click="handleFilterTags('All')"
+      />
       <VTag
           v-for="tag in tags"
           :key="tag"
           :title="tag"
+          :is-active="activeTags.includes(tag)"
           :class="$style.tag"
+          @click="handleFilterTags"
       />
       <li :class="$style.filter">
         <nuxt-icon name="filter" filled />
@@ -89,7 +123,7 @@ const handleUpdatePosts = (page: number): void => {
     <VPagination
         :class="$style.pagination"
         :posts-per-page="postsPerPage"
-        :posts-length="posts.length"
+        :posts-length="filteredPosts.length"
         @update-posts="handleUpdatePosts"
     />
   </section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, watch} from 'vue';
 import {headerNavigation} from '~/content';
 
 const emit = defineEmits<{
@@ -11,6 +11,23 @@ function handleOpenMenu(): void {
 }
 
 const navigation = ref(headerNavigation);
+const route = useRoute();
+const isLoggedIn = ref<boolean>(false);
+const username = ref<string>('');
+
+if (process.client) {
+  console.log("LOGG", isLoggedIn.value);
+  watch(
+      () => route.fullPath,
+      () => {
+        if (localStorage.getItem("username")) {
+          isLoggedIn.value = true;
+          username.value = localStorage.getItem("username");
+        }
+      },
+      {immediate: true}
+  );
+}
 </script>
 
 <template>
@@ -30,7 +47,14 @@ const navigation = ref(headerNavigation);
           </nuxt-link>
         </li>
       </ul>
-      <div :class="$style.buttons">
+<!--      <div v-if="isLoggedIn"-->
+<!--          :class="[$style.username, 'h3']"-->
+<!--      >-->
+<!--        <span>{{ username.slice(0, 1) }}</span>-->
+<!--      </div>-->
+      <div
+          :class="$style.buttons"
+      >
         <VButton title="Log In" color="outline" type="a" to="/login" />
         <VButton title="Sign Up" type="a" to="/signup" />
       </div>
@@ -136,6 +160,18 @@ const navigation = ref(headerNavigation);
   .buttons {
     display: flex;
     gap: 24px;
+  }
+
+  .username {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    background-color: $blue;
+    color: $white;
+    text-transform: uppercase;
   }
 
   .hamburger {

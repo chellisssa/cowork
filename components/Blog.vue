@@ -7,11 +7,11 @@ import type BlogPostPreview from '~/types/blog';
 
 const blogPostsList = ref<BlogPostPreview[]>(blogPosts.slice(0, 3));
 const sectionRef = ref<HTMLElement | null>(null);
-const isAnimationStarted = ref<boolean>(false);
+const isAnimated = ref<boolean>(false);
 let observer:  IntersectionObserver | undefined;
 
 const handleIntersection: IntersectionObserverCallback = () => {
-  isAnimationStarted.value = true;
+  isAnimated.value = true;
 };
 
 onMounted(() => {
@@ -20,7 +20,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" :class="[$style.Blog, {[$style._animated]: isAnimationStarted}]">
+  <section ref="sectionRef" :class="[$style.Blog, {[$style._animated]: isAnimated}]">
     <header :class="$style.header">
       <h3 :class="[$style.subtitle, 'subtitle']">Cowork Chronicles </h3>
       <h2 :class="[$style.title, 'h2']">
@@ -41,7 +41,7 @@ onMounted(() => {
           :key="post.id"
           :class="$style.post"
           :post="post"
-          :is-animated="isAnimationStarted"
+          :is-animated="isAnimated"
       />
     </ul>
     <VButton title="View All" :class="$style.button" type="a" href="/blog" />

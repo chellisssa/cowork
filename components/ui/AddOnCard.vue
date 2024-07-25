@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import type {AddOnCard} from "../../types/AddOnCard";
+import type {AddOnCard} from "../../types/addOnCard";
 
 interface Props {
   service: AddOnCard,

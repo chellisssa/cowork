@@ -27,6 +27,9 @@ import blog21 from './assets/images/blog/blog-21.jpg';
 import blog22 from './assets/images/blog/blog-22.jpg';
 import blog23 from './assets/images/blog/blog-23.jpg';
 import blog24 from './assets/images/blog/blog-24.jpg';
+import about1 from './assets/images/about/about-1.jpg';
+import about2 from './assets/images/about/about-2.jpg';
+import about3 from './assets/images/about/about-3.jpg';
 import {NavigationItem} from "./types/navigationItem";
 import {Company} from "./types/company";
 import {Advantage} from "./types/advantage";
@@ -37,12 +40,13 @@ import {BlogPostPreview} from "./types/blog";
 import {FooterColumn, FooterItem} from "./types/footer";
 import {PriceCard} from "./types/priceCard";
 import {AddOnCard} from "./types/AddOnCard";
+import {AboutItem} from "./types/aboutItem";
 
 export const headerNavigation:NavigationItem[] = [
     {
         id: 1,
         title: 'About',
-        url: '',
+        url: '/about',
     },
     {
         id: 2,
@@ -378,7 +382,7 @@ export const footerColumns: FooterColumn[] = [
             {
                 id: 2,
                 title: 'About',
-                url: '',
+                url: '/about',
             },
             {
                 id: 3,
@@ -557,4 +561,25 @@ export const addOnCard: AddOnCard[] = [
         buttonText: "Add to Your Subscription",
         disclaimer: "Require minimum Dedicated Desk subscription",
     },
+]
+
+export const aboutItems: AboutItem[] = [
+    {
+        id: 1,
+        title: "Our Story",
+        text: "Cowork was founded in 2023 by Jensen Turner who saw an unmet need for dynamic, design-focused coworking spaces that foster connection and productivity. What started as a modest shared office has grown into Delaware premier coworking destination serving freelancers, startups, remote teams and more.",
+        image: about1,
+    },
+    {
+        id: 2,
+        title: "Our Spaces",
+        text: "Our spaces are designed to inspire creativity, collaboration, and productivity. With ergonomic furniture, high-speed internet, and modern meeting rooms, we cater to the needs of freelancers, startups, and remote teams. Our dynamic spaces are easily accessible and surrounded by a thriving professional community.",
+        image: about2,
+    },
+    {
+        id: 3,
+        title: "Our Community",
+        text: "Our community is the heart of Cowork, bringing together freelancers, entrepreneurs, and remote teams from diverse industries. We foster connections through networking events, workshops, and social gatherings. Join us to be part of a supportive, vibrant community committed to your professional and personal growth.",
+        image: about3,
+    }
 ]

@@ -1,6 +1,6 @@
 <script setup lang=ts>
 import addOnServicesImage from '../assets/images/addon-services.jpg';
-import type {AddOnCard} from "../../types/AddOnCard";
+import type {AddOnCard} from "../../types/addOnCard";
 import {addOnCard} from "../../content";
 import {ref} from "vue";
 import {createIntersectionObserver} from "../../utils/createIntersectionObserver";
